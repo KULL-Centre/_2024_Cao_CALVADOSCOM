@@ -1,0 +1,35 @@
+from jinja2 import Template
+import yaml
+import subprocess
+
+submission = Template(
+"""#!/bin/bash
+#PBS -W group_list=ku_10001 -A ku_10001
+#PBS -N contact_map
+#PBS -l nodes=1:ppn=40:thinnode
+#PBS -l walltime=45:00:00
+#PBS -l mem=170gb
+#PBS -o {{cwd}}/{{dataset}}/{{record}}/cmap_out
+#PBS -e {{cwd}}/{{dataset}}/{{record}}/cmap_err
+
+source ~/.bashrc
+
+conda activate {{env_name}}
+
+python3 {{cwd}}/contact_map.py  --path2config {{path2config}}""")
+
+cwd = "/home/people/fancao/IDPs_multi"
+dataset = "slabC2_SCCOM_1"
+record = "hnRNPA1S@0.15@293"
+env_name = "CALVADOSCOM"
+cycle = 0  # only used to import simulation settings
+temp = 293
+
+config_data = dict(cwd=cwd, dataset=dataset, record=record, cycle=cycle, temp=temp)
+path2config = f"{cwd}/{dataset}/{record}/{cycle}/contact_map.yaml"
+yaml.dump(config_data, open(path2config,'w'))
+cmap_dict = dict(cwd=cwd, dataset=dataset, record=record, cycle=cycle, path2config=path2config, env_name=env_name)
+open(f"{cwd}/{dataset}/{record}/{cycle}/contact_map.pbs", 'w').write(submission.render(cmap_dict))
+
+proc = subprocess.run(['qsub', f"{cwd}/{dataset}/{record}/{cycle}/contact_map.pbs"],capture_output=True)
+print(proc)
