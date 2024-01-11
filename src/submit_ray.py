@@ -12,7 +12,7 @@ from protein_repo import get_ssdomains
 ########################################################################################################################
 env_name = "CALVADOSCOM"  # your own conda environment name
 batch_sys = "Deic"  # your computing server
-home_folder = "/groups/sbinlab/fancao"  #  your own folder on the server
+home_folder = "yourhomedir/_2024_Cao_CALVADOSCOM/src"  # absolute path to "submit_ray.py" 
 cwd_dict = {batch_sys: f"{home_folder}/{env_name}"}
 initial_types_dict = {
 "CALVADOS2CA": "C2",

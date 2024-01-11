@@ -12,7 +12,7 @@ import os
 ########################################################################################################################
 envname = "CALVADOSCOM"  # your own conda environment name
 batch_sys = "ROBUST"  # your computing server
-home_folder = "/home/fancao"  #  your own folder on the server
+home_folder = "yourhomedir/_2024_Cao_CALVADOSCOM/src"  # absolute path to "submit_slab.py"
 cwd_dict = {batch_sys: f"{home_folder}/{envname}"}
 CoarseGrained = "CA"  # COM, CA; CoarseGrained strategy;
 k_restraint = 700  # unit:KJ/(mol*nm^2); prior default value: 700; force constant of elastic network model;

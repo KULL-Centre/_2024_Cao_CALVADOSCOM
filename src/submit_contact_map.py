@@ -18,7 +18,7 @@ conda activate {{env_name}}
 
 python3 {{cwd}}/contact_map.py  --path2config {{path2config}}""")
 
-cwd = "/home/people/fancao/IDPs_multi"
+home_folder = "yourhomedir/_2024_Cao_CALVADOSCOM/src"  # absolute path to "submit_contact_map.py"
 dataset = "slabC2_SCCOM_1"
 record = "hnRNPA1S@0.15@293"
 env_name = "CALVADOSCOM"
