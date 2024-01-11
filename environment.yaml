@@ -1,0 +1,22 @@
+name: CALVADOSCOM_test
+channels:
+  - anaconda
+  - conda-forge
+  - defaults
+dependencies:
+  - cudatoolkit=11.8.0=h6a678d5_0
+  - pandas=2.0.3=py38h1128e8f_0
+  - mdtraj=1.9.7=py38hdee7691_4
+  - openmm=7.6.0=py38h30ff9b7_0
+  - python=3.8.16=h955ad1f_4
+  - scikit-learn=1.3.0=py38h1128e8f_0
+  - statsmodels=0.14.0=py38ha9d4c09_0
+  - pip=23.3.1=py38h06a4308_0
+  - pdbfixer=1.8.1=pyh6c4a22f_0
+  - pillow
+  - pip:
+      - deerpredict==0.1.9
+      - networkx==3.1
+      - protobuf==3.20.3
+      - ray==2.0.0
+      - matplotlib==3.6.2
