@@ -14,8 +14,8 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.width', None)
 np.set_printoptions(suppress=True)  # Cancel scientific counting display 
 np.set_printoptions(threshold=np.inf)
-
 import matplotlib as mpl
+
 text_size = 6
 label_size = text_size*1.5
 s = 20
