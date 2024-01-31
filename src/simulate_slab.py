@@ -32,7 +32,6 @@ def simulate(config):
     seq = config['seq']
     cycle = config["cycle"]
     replica = config["replica"]
-    calvados_version = config['calvados_version']
     cwd, path2fasta = config['cwd'], config['path2fasta']
     os.system(f"uname -n>{cwd}/{dataset}/{record}/{cycle}/{replica}_uname.txt")
     use_pdb, path2pdb = config['use_pdb'], config['path2pdb']
@@ -69,16 +68,15 @@ def simulate(config):
         use_hnetwork = False
         pae = None
         ssdomains = None
-    print(f'calvados version: {calvados_version}')
     # load residue parameters
-    residues = load_parameters(cwd, dataset, cycle, calvados_version, initial_type)
+    residues = load_parameters(cwd, dataset, cycle, initial_type)
     # build protein dataframe
     df = pd.DataFrame(columns=['pH', 'ionic', 'temp', 'eps_factor', 'fasta'], dtype=object)
     df.loc[record] = dict(pH=pH, ionic=ionic, temp=temp, eps_factor=eps_factor, fasta=seq)
     prot = df.loc[record]
     # LJ and YU parameters
     lj_eps, fasta, types, MWs = genParamsLJ(residues, name, prot)
-    yukawa_eps, yukawa_kappa = genParamsDH(residues, name, prot, temp, calvados_version)
+    yukawa_eps, yukawa_kappa = genParamsDH(residues, name, prot, temp)
 
     N = len(fasta)  # number of residues
 
@@ -133,7 +131,7 @@ def simulate(config):
     np.save((f"{cwd}/{dataset}/{record}/{cycle}/dmap.npy"), dmap)
     # interactions
     print("set_interactions....")
-    hb, yu, ah = set_interactions(system, residues, prot, calvados_version, lj_eps, cutoff, yukawa_kappa, yukawa_eps, N,
+    hb, yu, ah = set_interactions(system, residues, prot, lj_eps, cutoff, yukawa_kappa, yukawa_eps, N,
                                   n_chains=n_chains, CoarseGrained=CoarseGrained, dismatrix=dmap, isIDP=isIDP,
                                   fdomains=fdomains)
     print("set_interactions.... done")

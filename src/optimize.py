@@ -52,7 +52,7 @@ def optimize(config):
     proc_PRE = [(label,record) for record,prot in proteinsPRE.iterrows() for label in prot.labels]  # an empty dataframe will return an empty list
     # [(24, 'aSyn'), (42, 'aSyn'), (62, 'aSyn'), (87, 'aSyn'), (103, 'aSyn'), (10, 'OPN'), (33, 'OPN'), (64, 'OPN'), (88, 'OPN'), (117, 'OPN'), (130, 'OPN'), (144, 'OPN'), (162, 'OPN'), (184, 'OPN'), (203, 'OPN'), (16, 'FUS'), (86, 'FUS'), (142, 'FUS'), (16, 'FUS12E'), (86, 'FUS12E'), (142, 'FUS12E')]
 
-    df = load_parameters(cwd, dataset, cycle, "calvados_version", initial_type)
+    df = load_parameters(cwd, dataset, cycle, initial_type)
     df = df.set_index("three")
     logging.info(f"################cycle{cycle} optimization starts################")
     logging.info(f"lambda_oneMax: {lambda_oneMax}")

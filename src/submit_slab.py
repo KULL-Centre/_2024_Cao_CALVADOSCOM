@@ -30,7 +30,6 @@ replicas = 1  # nums of replica for each sequence
 gpu = True
 eps_factor=0.2
 gpu_id = 0
-calvados_version = 2  # as long as you don't use CALVADOS3or4, this always should be 2 even though you are trying to use CALVADOSCOM or CALVADOSSCCOM
 runtime = 20  # hours (overwrites steps if runtime is > 0)
 simulation_time = 500  # ns
 equi_time = 20  # ns
@@ -184,7 +183,7 @@ for dataset_replica in dataset_replicas:
                     N_steps /= scale
                     N_save /= scale
                     config_equi_filename = f'config_equi.yaml'
-                    config_equi_data = dict(cwd=cwd, calvados_version=calvados_version, name=name, dataset=dataset,
+                    config_equi_data = dict(cwd=cwd, name=name, dataset=dataset,
                         initial_type=initial_type, path2fasta=path2fasta, temp=float(prot.temp), pH=float(prot.pH), eps_factor=eps_factor,
                         ionic=float(prot.ionic), cycle=cycle, cutoff=cutoff, L=L, wfreq=int(N_save), slab=slab,
                         use_pdb=use_pdb, path2pdb=path2pdb, use_hnetwork=use_hnetwork, fdomains=fdomains, k_eq=k_eq,
@@ -198,7 +197,7 @@ for dataset_replica in dataset_replicas:
                     N_save *= scale
                     do_equi = False
                 config_sim_filename = f'config_sim.yaml'
-                config_sim_data = dict(cwd=cwd, calvados_version=calvados_version, name=name, dataset=dataset, initial_type=initial_type,
+                config_sim_data = dict(cwd=cwd, name=name, dataset=dataset, initial_type=initial_type,
                                    path2fasta=path2fasta, temp=float(prot.temp), ionic=float(prot.ionic), cycle=cycle, cutoff=cutoff, L=L, wfreq=int(N_save), slab=slab,
                                    use_pdb=use_pdb, path2pdb=path2pdb, use_hnetwork=use_hnetwork, fdomains=fdomains, k_eq=k_eq,
                                    use_ssdomains=use_ssdomains, replica=replica, input_pae=input_pae, k_restraint=k_restraint,

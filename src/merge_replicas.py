@@ -15,7 +15,7 @@ def centerDCD(config):
     validate = config["validate"]
     initial_type = config["initial_type"]
     print("validate:", validate)
-    residues = load_parameters(cwd, dataset, cycle, "calvados_version", initial_type)
+    residues = load_parameters(cwd, dataset, cycle, initial_type)
     if not validate:
         prot = pd.read_pickle(f'{cwd}/{dataset}/allproteins.pkl').loc[record]
     else:

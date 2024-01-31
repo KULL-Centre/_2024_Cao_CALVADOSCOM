@@ -39,7 +39,6 @@ replicas = 20  # nums of replica for each sequence
 gpu = False
 eps_factor=0.2
 gpu_id = 0
-calvados_version = 2  # which version of Ashbaugh-Hatch will be used
 discard_first_nframes = 10  # the first ${discard_first_nframes} will be discarded when merging replicas
 nframes = 200  # total number of frames to keep for each replica (exclude discarded frames)
 slab = False  # slab simulation parameters
@@ -74,7 +73,7 @@ for dataset_replica in dataset_replicas:
                         os.system(f"cp {cwd}/residues_pub.csv {cwd}/{dataset}")  # specify lambda initial values
                     if initial_type == "0.5" or initial_type == "Ran":
                         os.system(f"cp {cwd}/residues_-1.csv {cwd}/{dataset}")  # use 0.5 or random
-                    create_parameters(cwd, dataset, cycle, calvados_version, initial_type)
+                    create_parameters(cwd, dataset, cycle, initial_type)
                 elif validate:
                     if initial_type=="C1" or initial_type=="C2":
                         os.system(f"cp {cwd}/residues_pub.csv {cwd}/{dataset}")  # specify lambda initial values
@@ -183,7 +182,7 @@ for dataset_replica in dataset_replicas:
                         for replicas_list4MD_idx, replicas_list4MD in enumerate(collected_replicas):
                             if len(replicas_list4MD)!=0:
                                 config_sim_filename = f'config_sim{replicas_list4MD_idx}.yaml'
-                                config_sim_data = dict(cwd=cwd, calvados_version=calvados_version, name=name, dataset=dataset,
+                                config_sim_data = dict(cwd=cwd, name=name, dataset=dataset,
                                    path2fasta=path2fasta, temp=float(prot.temp), ionic=float(prot.ionic), cycle=cycle, pH=float(prot.pH),
                                    replicas_list4MD=replicas_list4MD, cutoff=cutoff, L=L, wfreq=int(N_save), slab=slab,
                                    use_pdb=use_pdb, path2pdb=path2pdb, use_hnetwork=use_hnetwork, fdomains=fdomains,
@@ -220,7 +219,7 @@ for dataset_replica in dataset_replicas:
                             merge_dependency = ""
                         config_mer_filename = f'config_merge.yaml'
                         # copy of config_sim_data
-                        config_merge_data = dict(cwd=cwd, calvados_version=calvados_version, name=name, dataset=dataset, path2fasta=path2fasta, temp=float(prot.temp), ionic=float(prot.ionic), cycle=cycle, pH=float(prot.pH), replicas_list4MD=replicas_list4MD, cutoff=cutoff, L=L, wfreq=int(N_save), slab=slab, use_pdb=use_pdb, path2pdb=path2pdb, use_hnetwork=use_hnetwork, fdomains=fdomains, use_ssdomains=use_ssdomains, input_pae=input_pae, k_restraint=k_restraint, record=record, gpu_id=gpu_id % 4, Threads=Threads, overwrite=True, N_res=N_res, CoarseGrained=CoarseGrained, isIDP=isIDP, Usecheckpoint=Usecheckpoint, eps_factor=eps_factor, initial_type=initial_type, seq=prot.fasta, steps=N_steps, gpu=gpu, replicas=replicas, discard_first_nframes=discard_first_nframes, validate=validate, nframes=nframes)
+                        config_merge_data = dict(cwd=cwd, name=name, dataset=dataset, path2fasta=path2fasta, temp=float(prot.temp), ionic=float(prot.ionic), cycle=cycle, pH=float(prot.pH), replicas_list4MD=replicas_list4MD, cutoff=cutoff, L=L, wfreq=int(N_save), slab=slab, use_pdb=use_pdb, path2pdb=path2pdb, use_hnetwork=use_hnetwork, fdomains=fdomains, use_ssdomains=use_ssdomains, input_pae=input_pae, k_restraint=k_restraint, record=record, gpu_id=gpu_id % 4, Threads=Threads, overwrite=True, N_res=N_res, CoarseGrained=CoarseGrained, isIDP=isIDP, Usecheckpoint=Usecheckpoint, eps_factor=eps_factor, initial_type=initial_type, seq=prot.fasta, steps=N_steps, gpu=gpu, replicas=replicas, discard_first_nframes=discard_first_nframes, validate=validate, nframes=nframes)
                         write_config(cwd, dataset, record, cycle, config_merge_data, config_filename=config_mer_filename)
                         mergerender_dict = dict(cwd=cwd, dataset=dataset, record=record, cycle=f'{cycle}',
                             requested_resource="1:ppn=1", node=node, merge_dependency=merge_dependency,

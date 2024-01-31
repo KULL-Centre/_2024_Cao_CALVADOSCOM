@@ -131,15 +131,12 @@ def genParamsLJ(df,record,prot):
     lj_eps = prot.eps_factor*4.184
     return lj_eps, fasta, types, MWs
 
-def genParamsDH(df,record,prot,temp,calvados_version):
+def genParamsDH(df,record,prot,temp):
     kT = 8.3145*temp*1e-3
     fasta = prot.fasta.copy()
     r = df.copy()
     # Set the charge on HIS based on the pH of the protein solution
-    if calvados_version == 4:
-        q = 0.75
-    else:
-        q = 1.0
+    q = 1.0
     
     r.loc['H','q'] = q / ( 1 + 10**(prot.pH-6) )
     r.loc['X'] = r.loc[fasta[0]]

@@ -297,31 +297,19 @@ def set_harmonic_network(N,dmap,pae_inv,yu,ah,n_chains=1,ssdomains=None,cs_cutof
     cs.setUsesPeriodicBoundaryConditions(True)
     return cs, yu, ah
 
-def set_interactions(system, residues, prot, calvados_version, lj_eps, cutoff, yukawa_kappa, yukawa_eps, N, n_chains=1,
+def set_interactions(system, residues, prot, lj_eps, cutoff, yukawa_kappa, yukawa_eps, N, n_chains=1,
                      CoarseGrained="CA", dismatrix=None, isIDP=True, fdomains=None):
     print("dismatrix.shape", dismatrix.shape)
     hb = openmm.openmm.HarmonicBondForce()
     # interactions
     energy_expression = 'select(step(r-2^(1/6)*s),4*eps*l*((s/r)^12-(s/r)^6-shift),4*eps*((s/r)^12-(s/r)^6-l*shift)+eps*(1-l))'
-    if calvados_version in [1, 2]:
-        ah = openmm.openmm.CustomNonbondedForce(
-            energy_expression + '; s=0.5*(s1+s2); l=0.5*(l1+l2); shift=(0.5*(s1+s2)/rc)^12-(0.5*(s1+s2)/rc)^6')
-    elif calvados_version == 3:  # interactions scaled aromatics + R + H
-        ah = openmm.openmm.CustomNonbondedForce(
-            energy_expression + '; s=0.5*(s1+s2); l=sqrt(l1*l2)+m1*m2*0.8; shift=(0.5*(s1+s2)/rc)^12-(0.5*(s1+s2)/rc)^6')
-    elif calvados_version == 4:  # scaled charges
-        ah = openmm.openmm.CustomNonbondedForce(
-            energy_expression + '; s=0.5*(s1+s2); l=sqrt(l1*l2)+m1*m2*0.5; shift=(0.5*(s1+s2)/rc)^12-(0.5*(s1+s2)/rc)^6')
-    else:
-        raise
+    ah = openmm.openmm.CustomNonbondedForce(energy_expression + '; s=0.5*(s1+s2); l=0.5*(l1+l2); shift=(0.5*(s1+s2)/rc)^12-(0.5*(s1+s2)/rc)^6')
+
 
     ah.addGlobalParameter('eps', lj_eps * unit.kilojoules_per_mole)
     ah.addGlobalParameter('rc', float(cutoff) * unit.nanometer)
     ah.addPerParticleParameter('s')
     ah.addPerParticleParameter('l')
-
-    if calvados_version in [3, 4]:
-        ah.addPerParticleParameter('m')
 
     print('rc', cutoff * unit.nanometer)
 
@@ -336,12 +324,7 @@ def set_interactions(system, residues, prot, calvados_version, lj_eps, cutoff, y
         end = j * N + N  # n_residues
         for a, e in zip(prot.fasta, yukawa_eps):
             yu.addParticle([e * unit.nanometer * unit.kilojoules_per_mole])
-            if calvados_version in [3, 4]:
-                m = 1.0 if a in ['R', 'H', 'F', 'Y', 'W'] else 0.0
-                ah.addParticle([residues.loc[a].sigmas * unit.nanometer, residues.loc[a].lambdas * unit.dimensionless,
-                                m * unit.dimensionless])
-            else:
-                ah.addParticle([residues.loc[a].sigmas * unit.nanometer, residues.loc[a].lambdas * unit.dimensionless])
+            ah.addParticle([residues.loc[a].sigmas * unit.nanometer, residues.loc[a].lambdas * unit.dimensionless])
 
         for i in range(begin, end - 1):  # index starts from 0
             residue_idx = i - begin  # index starts from 0, 0+N...
@@ -545,16 +528,15 @@ def create_parameters(flib, dataset, initial_type, tune4W=0):
         if tune4W!=0:
             residues.loc["W", "lambdas"] = tune4W
         residues.to_csv(f'{flib}/{dataset}/residues_pub.csv')
-    if initial_type in ["CALVADOS_COM"]:
+    if initial_type in ["C3"]:
         residues = pd.read_csv(f'{flib}/{dataset}/residues_pub.csv').set_index('one')
-        residues["lambdas"] = residues[initial_type]
+        residues["lambdas"] = residues["CALVADOS3"]
         residues.to_csv(f'{flib}/{dataset}/residues_pub.csv')
     print("Properties used:\n", residues)
 
 
-def load_parameters(flib, dataset, cycle, calvados_version, initial_type):
-    # if calvados_version in [1,2]:
-    if initial_type in ["C1", "C2", "CALVADOS_COM"]:
+def load_parameters(flib, dataset, cycle, initial_type):
+    if initial_type in ["C1", "C2", "C3"]:
         residues = pd.read_csv(f'{flib}/{dataset}/residues_pub.csv').set_index('one', drop=False)
     if initial_type in ["0.5", "Ran"]:
         residues = pd.read_csv(f'{flib}/{dataset}/residues_-1.csv').set_index('one', drop=False)
