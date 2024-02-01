@@ -8,16 +8,18 @@ import os
 import MDAnalysis
 from protein_repo import get_ssdomains
 ########################################################################################################################
-# general simulation details (please read this block carefully if you want to run optimizations) #
-########################################################################################################################
-env_name = "CALVADOSCOM"  # your own conda environment name
+# general simulation details (please read this block carefully if you want to run optimizations or production simulations for your own proteins) #
+# comments containing "only for optimization" should not be changed if you just want to run production simulations for your own proteins with CALVADOS3
+
+env_name = "CALVADOS3"  # your own conda environment name
 batch_sys = "Deic"  # your computing server
 home_folder = "yourhomedir/_2024_Cao_CALVADOSCOM/src"  # absolute path to "submit_ray.py" 
-cwd_dict = {batch_sys: f"{home_folder}/{env_name}"}
+cwd_dict = {batch_sys: f"{home_folder}"}
 initial_types_dict = {
 "CALVADOS2CA": "C2",
 "CALVADOS2COM": "C2",
 "CALVADOS2SCCOM": "C2",
+"CALVADOS3COM": "C3",
 "IDPs_MDPsCOM": "0.5",
 "IDPs_MDPsSCCOM": "0.5"
 }  # which forcefield to use; C2 means CALVADOS2; 0.5 means optimization procedure starting from 0.5
@@ -26,12 +28,13 @@ CoarseGrained = "COM"  # COM, CA, SCCOM; CoarseGrained strategy;
 validate = False  # optimization or validation
 thetas = [0.08]  # prior default value: 0.08
 k_restraint = 700  # unit:KJ/(mol*nm^2); prior default value: 700; force constant of elastic network model;
-cycles = [0]  # optimization cycles, 0-based
+cycles = [0]  # optimization cycles, 0-based, only for optimization
 dataset_replicas = [1]  # used to do parallel optimization runs;
 cutoffs = [2.2]  # cutoff for the nonionic interactions, nm
-purpose = "IDPs_MDPs"  # IDPs_MDPs means optimization including IDPs and MDPs, CALVADOS2 means using CALVADOS2 to simulate proteins;
+purpose = "CALVADOS3"  # IDPs_MDPs means optimization including IDPs and MDPs, CALVADOS2 means using CALVADOS2 to simulate proteins;
+path2pulchra = "/groups/sbinlab/fancao/pulchra"
 
-
+# no need to change
 rebalancechi2_rg= False
 include_PREloss = True
 lambda_oneMax = False  # the limitation that lambda should not exceed 1.0
@@ -43,7 +46,6 @@ discard_first_nframes = 10  # the first ${discard_first_nframes} will be discard
 nframes = 200  # total number of frames to keep for each replica (exclude discarded frames)
 slab = False  # slab simulation parameters
 Usecheckpoint = False
-path2pulchra = "/groups/sbinlab/fancao/pulchra"
 ########################################################################################################################
 #                                             submit simulations                                                       #
 ########################################################################################################################
@@ -62,42 +64,46 @@ for dataset_replica in dataset_replicas:
             fdomains = f'{cwd}/{dataset}/domains.yaml'
             if not os.path.isdir(f"{cwd}/{dataset}"):
                 os.system(f"mkdir -p {cwd}/{dataset}")
-            if validate:  # you need first run validate=False and then validate=True to make sure those files can be copied;
-                os.system(f"cp {cwd}/{dataset[:-len(validate_str)]}/MultiDomainsRgs.pkl {cwd}/{dataset}")
-                os.system(f"cp {cwd}/{dataset[:-len(validate_str)]}/allproteins.pkl {cwd}/{dataset}")
-                os.system(f"cp {cwd}/{dataset[:-len(validate_str)]}/proteinsPRE.pkl {cwd}/{dataset}")
+            proteinsPRE = initProteinsPRE()
+            IDPsRgs = initIDPsRgs(validate=False)
+            IDPsRgs_names = list(IDPsRgs.index)
+            MultiDomainsRgs = initMultiDomainsRgs(validate=False)
+            multidomain_names = list(MultiDomainsRgs.index)
+            proteinsRgs = pd.concat((IDPsRgs, MultiDomainsRgs), sort=True)
+            IDPsRgs = proteinsRgs.loc[IDPsRgs_names]
+            MultiDomainsRgs = proteinsRgs.loc[multidomain_names]
+            allproteins = pd.concat((proteinsPRE, IDPsRgs, MultiDomainsRgs), sort=True)
+            proteinsPRE.to_pickle(f'{cwd}/{dataset}/proteinsPRE.pkl')
+            IDPsRgs.to_pickle(f'{cwd}/{dataset}/IDPsRgs.pkl')
+            MultiDomainsRgs.to_pickle(f'{cwd}/{dataset}/MultiDomainsRgs.pkl')
+            allproteins.to_pickle(f'{cwd}/{dataset}/allproteins.pkl')
             os.system(f"cp {cwd}/domains.yaml {fdomains}")
             for cycle in cycles:
                 if cycle == 0:
-                    if initial_type=="C1" or initial_type=="C2":
+                    if initial_type in ["C1", "C2", "C3"]:
                         os.system(f"cp {cwd}/residues_pub.csv {cwd}/{dataset}")  # specify lambda initial values
                     if initial_type == "0.5" or initial_type == "Ran":
                         os.system(f"cp {cwd}/residues_-1.csv {cwd}/{dataset}")  # use 0.5 or random
                     create_parameters(cwd, dataset, cycle, initial_type)
                 elif validate:
-                    if initial_type=="C1" or initial_type=="C2":
+                    if initial_type in ["C1","C2","C3"]:
                         os.system(f"cp {cwd}/residues_pub.csv {cwd}/{dataset}")  # specify lambda initial values
                     if initial_type == "0.5" or initial_type == "Ran":
                         os.system(f"cp {cwd}/{dataset[:-len(validate_str)]}/residues_{cycle-1}.csv {cwd}/{dataset}")  # use 0.5 or random
-                proteinsPRE = initProteinsPRE()
-                IDPsRgs = initIDPsRgs(validate=validate)
-                IDPsRgs_names = list(IDPsRgs.index)
-                MultiDomainsRgs = initMultiDomainsRgs(validate=validate)
-                multidomain_names = list(MultiDomainsRgs.index)
-                proteinsRgs = pd.concat((IDPsRgs, MultiDomainsRgs), sort=True)
-                IDPsRgs = proteinsRgs.loc[IDPsRgs_names]
-                MultiDomainsRgs = proteinsRgs.loc[multidomain_names]
-                allproteins = pd.concat((proteinsPRE, IDPsRgs, MultiDomainsRgs), sort=True)
-                if not validate:
-                    proteinsPRE.to_pickle(f'{cwd}/{dataset}/proteinsPRE.pkl')
-                    IDPsRgs.to_pickle(f'{cwd}/{dataset}/IDPsRgs.pkl')
-                    MultiDomainsRgs.to_pickle(f'{cwd}/{dataset}/MultiDomainsRgs.pkl')
-                    allproteins.to_pickle(f'{cwd}/{dataset}/allproteins.pkl')
-                else:
-                    proteinsPRE.to_pickle(f'{cwd}/{dataset}/proteinsPRE_test.pkl')
-                    IDPsRgs.to_pickle(f'{cwd}/{dataset}/IDPsRgs_test.pkl')
-                    MultiDomainsRgs.to_pickle(f'{cwd}/{dataset}/MultiDomainsRgs_test.pkl')
-                    allproteins.to_pickle(f'{cwd}/{dataset}/allproteins_test.pkl')
+                if validate:
+                    proteinsPRE = initProteinsPRE()
+                    IDPsRgs = initIDPsRgs(validate=validate)
+                    IDPsRgs_names = list(IDPsRgs.index)
+                    MultiDomainsRgs = initMultiDomainsRgs(validate=validate)
+                    multidomain_names = list(MultiDomainsRgs.index)
+                    proteinsRgs = pd.concat((IDPsRgs, MultiDomainsRgs), sort=True)
+                    IDPsRgs = proteinsRgs.loc[IDPsRgs_names]
+                    MultiDomainsRgs = proteinsRgs.loc[multidomain_names]
+                    allproteins = pd.concat((proteinsPRE, IDPsRgs, MultiDomainsRgs), sort=True)
+                    proteinsPRE.to_pickle(f'{cwd}/{dataset}/proteinsPRE_validate.pkl')
+                    IDPsRgs.to_pickle(f'{cwd}/{dataset}/IDPsRgs_validate.pkl')
+                    MultiDomainsRgs.to_pickle(f'{cwd}/{dataset}/MultiDomainsRgs_validate.pkl')
+                    allproteins.to_pickle(f'{cwd}/{dataset}/allproteins_validate.pkl')
                 allproteins['N'] = allproteins['fasta'].apply(lambda x: len(x))
                 N_res = []
                 for record in allproteins.index:

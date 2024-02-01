@@ -19,7 +19,7 @@ def centerDCD(config):
     if not validate:
         prot = pd.read_pickle(f'{cwd}/{dataset}/allproteins.pkl').loc[record]
     else:
-        prot = pd.read_pickle(f'{cwd}/{dataset}/allproteins_test.pkl').loc[record]
+        prot = pd.read_pickle(f'{cwd}/{dataset}/allproteins_validate.pkl').loc[record]
 
     incomplete = True
     while incomplete:
