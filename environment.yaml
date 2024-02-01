@@ -13,6 +13,7 @@ dependencies:
   - statsmodels=0.14.0
   - pip=23.3.1
   - pdbfixer=1.8.1
+  - numpy=1.23.5
   - pillow
   - pip:
       - deerpredict==0.1.9

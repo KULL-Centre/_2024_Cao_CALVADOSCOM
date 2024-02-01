@@ -40,7 +40,7 @@ To use this repository:
 
 ## Run single-chain simulations with CALVADOS 3:
 
-Follow 1-4 if your protein is a multi-domain protein; just follow 1 and 4 if it is a intrinsically disordered protein;
+Follow 1-4 if your protein is a multi-domain protein; only follow 1 and 4 if it is a intrinsically disordered protein;
 1. decide a proper protein name (`pro_name`) to avoid conflict with existing proteins;
 2. insert the protein structure file (must be `.pdb`, the `resSeq` should start from `1`) into `/src/extract_relax` directory with a nomenclature as `${pro_name}_rank0_relax.pdb`;
 3. determine the domain boundaries of the protein. Each domain is restrained separately. For example, 
@@ -65,13 +65,14 @@ proteins.loc['${pro_name}'] = dict(temp=${experimental_temperate}, expRg=${exper
 The new lines should be in `initIDPsRgs` function under `if validate:` condition if it is a intrinsically disordered protein; 
 
 The new lines should be in `initMultiDomainsRgs` function under `if validate:` condition if it is a multi-domain protein.
+
 5. modify `/src/submit_ray.py` as you want and submit jobs by
 ```
 python3 submit_ray.py
 ```
 ## Run multi-chain simulations with CALVADOS 3:
 1. make sure the single-chain simulations of your interested proteins have been finished;
-2. pick the most compact conformation from single-chain trajectories and save it under `src/extract_relax` as `${pro_name}_${CG}_ini.pdb`. `CG` is the coarse-grained method (CA, COM or SCCOM);
+2. pick the most compact conformation (smallest Rg) from single-chain trajectories and save it under `src/extract_relax` as `${pro_name}_${CG}_ini.pdb`. `CG` is the coarse-grained method (CA, COM or SCCOM);
 3. add experimental data to `src/csat_calvados2_test.csv` (if IDP) or `src/csat_MDPs_test.csv` (if MDP);
 4. modify `/src/submit_slab.py` as you want and submit jobs by
 ```

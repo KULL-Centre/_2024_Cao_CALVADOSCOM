@@ -14,13 +14,13 @@ envname = "CALVADOS3"  # your own conda environment name
 batch_sys = "ROBUST"  # your computing server
 home_folder = "yourhomedir/_2024_Cao_CALVADOSCOM/src"  # absolute path to "submit_slab.py"
 cwd_dict = {batch_sys: f"{home_folder}"}
-CoarseGrained = "CA"  # COM, CA; CoarseGrained strategy;
+CoarseGrained = "COM"  # COM, CA; CoarseGrained strategy;
 k_restraint = 700  # unit:KJ/(mol*nm^2); prior default value: 700; force constant of elastic network model;
-cycles = [0,1,2,3]
+cycles = [0]
 dataset_replicas = [1]  # used to discriminate from other runs;
 cwd = cwd_dict[batch_sys]  # current working directory
-initial_type = "CALVADOS3"  # which forcefield you want to use
-IDP = True  # simulate IDPs or MDPs
+initial_type = "C3"  # which forcefield you want to use, C3 means CALVADOS3
+IDP = False  # simulate IDPs or MDPs
 # don't need to change
 slab = True
 cutoff = 2.0  # cutoff for the nonionic interactions in slab simulations, default is 2 nm
@@ -110,8 +110,6 @@ for dataset_replica in dataset_replicas:
         os.system(f"mkdir -p {cwd}/{dataset}")
     os.system(f"cp {cwd}/domains.yaml {fdomains}")
     for record in records:
-        if record not in ["A2"]:
-            continue
         chains = 100  # 100, 150, 200
         if record in ["hnRNPA1S"]:
             chains = 150
