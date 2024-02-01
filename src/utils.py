@@ -109,7 +109,7 @@ declare -a proteinsPRE_list=({{proteins}})
 for name in ${proteinsPRE_list[@]}
 do
 cp -r {{cwd}}/expPREs/$name/expPREs {{cwd}}/{{dataset}}/$name
-python3 {{cwd}}/pulchra.py --cwd {{cwd}} --dataset {{dataset}} --name $name --cycle {{cycle}} --num_cpus 10 --pulchra /groups/sbinlab/fancao/pulchra
+python3 {{cwd}}/pulchra.py --cwd {{cwd}} --dataset {{dataset}} --name $name --cycle {{cycle}} --num_cpus 10 --pulchra {{path2pulchra}}
 done
 
 python3 {{cwd}}/optimize.py  --path2config {{path2config}}""")
