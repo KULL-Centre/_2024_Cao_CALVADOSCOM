@@ -64,6 +64,7 @@ for dataset_replica in dataset_replicas:
             fdomains = f'{cwd}/{dataset}/domains.yaml'
             if not os.path.isdir(f"{cwd}/{dataset}"):
                 os.system(f"mkdir -p {cwd}/{dataset}")
+
             proteinsPRE = initProteinsPRE()
             IDPsRgs = initIDPsRgs(validate=False)
             IDPsRgs_names = list(IDPsRgs.index)
@@ -78,6 +79,7 @@ for dataset_replica in dataset_replicas:
             MultiDomainsRgs.to_pickle(f'{cwd}/{dataset}/MultiDomainsRgs.pkl')
             allproteins.to_pickle(f'{cwd}/{dataset}/allproteins.pkl')
             os.system(f"cp {cwd}/domains.yaml {fdomains}")
+
             for cycle in cycles:
                 if cycle == 0:
                     if initial_type in ["C1", "C2", "C3"]:

@@ -112,7 +112,8 @@ def optimize(config):
     logging.info(f'Initial Chi2 Gyration Radius {np.round(balance_chi2_rg(IDPsRgs, MultiDomainsRgs, proteinsRgs) if rebalancechi2_rg else proteinsRgs.chi2_rg.mean(),3)} +/- {np.round(proteinsRgs.chi2_rg.std(),3)}')
 
     selHPS = pd.read_csv(f'{cwd}/selHPS.csv',index_col=0)
-    kde = KernelDensity(kernel='gaussian',bandwidth=0.05).fit(selHPS.T.values)
+    # kde = KernelDensity(kernel='gaussian',bandwidth=0.05).fit(selHPS.T.values)
+    kde = KernelDensity(kernel='gaussian', bandwidth=.05).fit(selHPS.loc[df.one].T.values)
     theta_prior = theta * kde.score_samples(df.lambdas.values.reshape(1, -1))[0]
     xi = xi_0
     logging.info(f'Initial theta*prior {np.round(theta_prior,2)}')
