@@ -1,6 +1,7 @@
 # CALVADOS 3
 
-This repository contains codes, raw data and parameter files that used to reproduce the results in ${paper}.
+This repository contains codes, raw data and parameter files that used to reproduce the results in [A coarse-grained model for disordered and multi-domain proteins
+](https://www.biorxiv.org/content/10.1101/2024.02.03.578735v1).
 
 ## Layout
 
