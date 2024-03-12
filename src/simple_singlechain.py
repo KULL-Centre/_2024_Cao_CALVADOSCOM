@@ -1,6 +1,7 @@
 """
-This script is not designed for any HPC platform. It can be used for a quick simulation for your protein;
+This script is not designed for any HPC platform. It can be used for a quick single-chain simulation for your protein;
 Just modify the basic settings in Block 2, you can get a coarse-grained trajectory with CALVADOS3;
+Make sure this script is still in the src/ directory because it is using functions from other files;
 """
 ########################################################################################################################
 #                                   1. import modules                                                                   #
