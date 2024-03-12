@@ -37,8 +37,9 @@ To use this repository:
 
     ``conda activate CALVADOS3``
 
-3. install `pulchra` (https://www.pirx.com/pulchra/) and assign its absolute path to `path2pulchra` in `src/submit_ray.py`;
-4. 👋 Please go for `simple_singlechain.py` if you are interested in running single-chain simulation with CALVADOS3 in a simpler way 👋.
+3. 👋 Please go for `simple_singlechain.py` if you are interested in running single-chain simulation with CALVADOS3 in a simpler way 👋.
+4. (optional, only for optimization) install `pulchra` (https://www.pirx.com/pulchra/) and assign its absolute path to `path2pulchra` in `src/submit_ray.py`;
+ 
 
 ## Run single-chain simulations with CALVADOS 3:
 
