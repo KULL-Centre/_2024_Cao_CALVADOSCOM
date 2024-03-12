@@ -4,7 +4,7 @@ Just modify the basic settings in Block 2, you can get a coarse-grained trajecto
 Make sure this script is still in the src/ directory because it is using functions from other files;
 """
 ########################################################################################################################
-#                                   1. import modules                                                                   #
+#                                   1. import modules                                                                  #
 ########################################################################################################################
 from utils import *
 from rawdata import *
