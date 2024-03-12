@@ -64,7 +64,9 @@ S4FL:
 ```
 fasta_${pro_name} = "${protein_sequence_oneletter}"
 proteins.loc['${pro_name}'] = dict(temp=${experimental_temperate}, expRg=${experimental_Rg}, expRgErr=${experimental_RgErr}, pH=${experimental_pH}, fasta=list(fasta_${pro_name}), ionic=${experimental_ionic)}
+# if you don't have to compare with experimental data, please set "expRg" and "expRgErr" to None. It won't raise errors for simulations, but will for optimization
 ```
+
 The new lines should be in `initIDPsRgs` function under `if validate:` condition if it is a intrinsically disordered protein; 
 
 The new lines should be in `initMultiDomainsRgs` function under `if validate:` condition if it is a multi-domain protein.
