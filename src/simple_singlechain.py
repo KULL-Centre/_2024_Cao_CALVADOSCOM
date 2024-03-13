@@ -1,7 +1,8 @@
 """
 This script is not designed for any HPC platform. It can be used for a quick single-chain simulation for your protein;
-Just modify the basic settings in Block 2, you can get a coarse-grained trajectory with CALVADOS3;
-Make sure this script is still in the src/ directory because it is using functions from other files;
+Just modify the basic settings in Block 2, you can get a coarse-grained trajectory with CALVADOS3
+by running "python3 simple_singlechain.py";
+Make sure this script is always in the src/ directory because it is using functions from other files in src/;
 """
 ########################################################################################################################
 #                                   1. import modules                                                                  #
@@ -39,7 +40,7 @@ if customized_simulation_time == None:  # if None, script will use the default s
     discard_first_nframes = 10  # the first ${discard_first_nframes} will be discarded for each replica
 else:
     # you have to modify this block if you don't set 'customized_simulation_time' to 'None'
-    interval = 0.01  #  time interval to save each frame, unit: ns
+    interval = 0.01  # time interval to save each frame, unit: ns
 
 ########################################################################################################################
 #          3. no need to change parameters below unless you know exactly what you are doing                            #
