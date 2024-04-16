@@ -41,7 +41,7 @@ To use this repository:
  
 
 ## Run single-chain simulations with CALVADOS 3:
-👋 Please go for `src/simple_singlechain.py` if you are interested in running single-chain simulation with CALVADOS3 in a simpler way 👋. (compared with `src/submit_ray.py`)
+👋 Please go for `src/simple_singlechain.py` if you are interested in running single-chain simulation with CALVADOS3 in a simpler way 👋. (compared with using `src/submit_ray.py` and following the instructions below)
 
 Follow 1-4 if your protein is a multi-domain protein; only follow 1 and 4 if it is a intrinsically disordered protein;
 1. decide a proper protein name (`pro_name`) to avoid conflict with existing proteins;
