@@ -28,7 +28,7 @@ replicas = 20  # nums of simulation replica for your protein
 # is it a IDP or MDP?
 isIDP = False
 if not isIDP:
-    domain_boundaries = {record: [[1,226], [352,566]]}  # define domain boundaries; for more information, please check step3 in "Run single-chain simulations with CALVADOS 3" from https://github.com/KULL-Centre/_2024_Cao_CALVADOSCOM/blob/main/README.md
+    domain_boundaries = {record: [[1, 226], [352, 566]]}  # define domain boundaries; for more information, please check step3 in "Run single-chain simulations with CALVADOS 3" from https://github.com/KULL-Centre/_2024_Cao_CALVADOSCOM/blob/main/README.md
     # the resSeq in 'path2pdb' file must start from 1 !!!!! the code won't check it itself.
     path2pdb = '/home/ckv176/_2024_Cao_CALVADOSCOM/src/extract_relax/GS48_rank0_relax.pdb'  # absolute path to atomistic structure
 
@@ -135,7 +135,7 @@ config_merge_data = dict(cwd=cwd, name=name, dataset=dataset, temp=temp, ionic=i
                          steps=N_steps, gpu=gpu, replicas=replicas, discard_first_nframes=discard_first_nframes,
                          validate=False, nframes=nframes)
 centerDCD_simple(config_merge_data)
-# you will get a trajectory ${record}.dcd and a corresponding topology file ${record}.pdb after performing codes above;
+# you will get a trajectory ${record}.dcd and a corresponding topology file ${record}.pdb after performing codes above in ${cwd}/${dataset}/${record}/${cycle} dir;
 # the trajectory file ${record}.dcd contains all the trajectories from each replica;
 # trajectory file ${record}.dcd can be used for post analysis, like calculating Rg (see below);
 
@@ -153,4 +153,4 @@ cm = np.sum(t.xyz*masses[np.newaxis,:,np.newaxis],axis=1)/masses.sum()
 si = np.linalg.norm(t.xyz - cm[:,np.newaxis,:],axis=2)
 # calculate rg
 rgarray = np.sqrt(np.sum(si**2*masses,axis=1)/masses.sum())
-np.save(f"{cwd}/{dataset}/{record}/{cycle}/Rg_traj.npy", rgarray)
+np.save(f"{cwd}/{dataset}/{record}/{cycle}/Rg_traj.npy", rgarray)  # this contains Rg trajectory (n_frames,)
