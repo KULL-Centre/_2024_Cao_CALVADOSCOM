@@ -28,7 +28,12 @@ replicas = 20  # nums of simulation replica for your protein
 # is it a IDP or MDP?
 isIDP = False
 if not isIDP:
-    domain_boundaries = {record: [[1, 226], [352, 566]]}  # define domain boundaries; for more information, please check step3 in "Run single-chain simulations with CALVADOS 3" from https://github.com/KULL-Centre/_2024_Cao_CALVADOSCOM/blob/main/README.md
+    # define domain boundaries; for more information, please check step3 in "Run single-chain simulations with CALVADOS 3" from https://github.com/KULL-Centre/_2024_Cao_CALVADOSCOM/blob/main/README.md
+    domain_boundaries = {record: [[1, 226],  # this is one domain boundary
+                                  # [[230,240],[250,351]]  # a nested list as an example of excluding a small loop (241-249) within domain
+                                  [352, 566]  # this is another domain boundary
+                                  ]
+                         }
     # the resSeq in 'path2pdb' file must start from 1 !!!!! the code won't check it itself.
     path2pdb = '/home/ckv176/_2024_Cao_CALVADOSCOM/src/extract_relax/GS48_rank0_relax.pdb'  # absolute path to atomistic structure
 
