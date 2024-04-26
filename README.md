@@ -29,7 +29,7 @@ This repository contains codes, raw data and parameter files that used to reprod
 
 To use this repository:
 1. download and unzip it; 
-2. create a conda environment with the following command. (alternative: install packages separately by `pip` or `conda`);
+2. create a conda environment with the following command. (alternative: install packages separately by `pip` or `conda`; you can skip installing `deerpredict` package if you only need simulations not optimizations);
 
     ``conda env create -f environment.yaml``
 
