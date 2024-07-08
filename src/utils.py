@@ -1004,13 +1004,13 @@ def simulate_simple(config):
     # assemble simulation
     if gpu:
         # os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-        os.environ["CUDA_VISIBLE_DEVICES"] = "0"  # feasible
+        os.environ["CUDA_VISIBLE_DEVICES"] = f"{gpu_id}"  # feasible
         os.system("echo $CUDA_VISIBLE_DEVICES")
         # os.system("export CUDA_VISIBLE_DEVICES=1")
         # platform = openmm.Platform.getPlatformByName("CUDA")
         simulation = app.simulation.Simulation(pdb.topology, system, integrator,
                                                openmm.Platform.getPlatformByName("CUDA"),
-                                               {"DeviceIndex": f"{gpu_id}"})
+                                               {"DeviceIndex": f"0"})
     else:
         platform = openmm.Platform.getPlatformByName('CPU')
         simulation = app.simulation.Simulation(pdb.topology, system, integrator, platform, dict(Threads=str(Threads)))

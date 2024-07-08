@@ -47,19 +47,19 @@ else:
     # you have to modify this block if you don't set 'customized_simulation_time' to 'None'
     interval = 0.01  # time interval to save each frame, unit: ns
 
+purpose = "CALVADOS3"  # it helps you remember your directory
+gpu = True  # gpu acceleration. Once set to True, the replicas will be simulated serially;
+gpu_id = 0  # the mapped gpu_id, starting from 0
 ########################################################################################################################
 #          3. no need to change parameters below unless you know exactly what you are doing                            #
 ########################################################################################################################
 initial_type = "C3"  # which forcefield to use; C3 means CALVADOS3;
 CoarseGrained = "COM"  # COM: Center of mass; CA: Cα; CoarseGrained strategy;
 k_restraint = 700  # unit:KJ/(mol*nm^2); prior default value: 700; force constant of elastic network model;
-purpose = "CALVADOS3"  # CALVADOS3 means using CALVADOS3 to simulate proteins;
 dataset_replica = 1
 cutoff = 2.0  # 2.0 nm for production
 cycle = 0  # optimization cycles, 0-based, only for optimization
-gpu = False  # gpu acceleration
 eps_factor = 0.2
-gpu_id = 0
 Usecheckpoint = False
 slab = False
 
@@ -119,12 +119,12 @@ config_sim_data = dict(cwd=cwd, name=name, dataset=dataset, temp=temp, ionic=ion
    replicas_list4MD=replicas_list4MD, cutoff=cutoff, L=L, wfreq=int(N_save), slab=slab,
    use_pdb=use_pdb, path2pdb=path2pdb, use_hnetwork=use_hnetwork, fdomains=fdomains,
    use_ssdomains=use_ssdomains, input_pae=input_pae, k_restraint=k_restraint, record=record,
-   gpu_id=gpu_id%4, Threads=1, overwrite=True, N_res=len(fasta),
+   gpu_id=gpu_id, Threads=1, overwrite=True, N_res=len(fasta),
    CoarseGrained=CoarseGrained, isIDP=isIDP, Usecheckpoint=Usecheckpoint, eps_factor=eps_factor,
    initial_type=initial_type, seq=fasta, steps=N_steps, gpu=gpu, replicas=replicas,
    discard_first_nframes=discard_first_nframes,validate=False, nframes=nframes)
 
-ray.init(num_cpus=len(replicas_list4MD), include_dashboard=False)
+ray.init(num_cpus=1 if gpu else len(replicas_list4MD), include_dashboard=False)
 for replica in replicas_list4MD:
     config_sim_data["replica"] = replica
     yaml.dump(config_sim_data, open(f"{cwd}/{dataset}/{record}/{cycle}/config_{replica}.yaml", 'w'))
@@ -134,7 +134,7 @@ config_merge_data = dict(cwd=cwd, name=name, dataset=dataset, temp=temp, ionic=i
                          cycle=cycle, pH=pH, replicas_list4MD=replicas_list4MD, cutoff=cutoff, L=L,
                          wfreq=int(N_save), slab=slab, use_pdb=use_pdb, path2pdb=path2pdb,
                          use_hnetwork=use_hnetwork, fdomains=fdomains, use_ssdomains=use_ssdomains,
-                         input_pae=input_pae, k_restraint=k_restraint, record=record, gpu_id=gpu_id % 4, Threads=1,
+                         input_pae=input_pae, k_restraint=k_restraint, record=record, gpu_id=gpu_id, Threads=1,
                          overwrite=True, N_res=len(fasta), CoarseGrained=CoarseGrained, isIDP=isIDP,
                          Usecheckpoint=Usecheckpoint, eps_factor=eps_factor, initial_type=initial_type, seq=fasta,
                          steps=N_steps, gpu=gpu, replicas=replicas, discard_first_nframes=discard_first_nframes,
