@@ -1,9 +1,9 @@
 # CALVADOS 3
 
 This repository contains codes, raw data and parameter files that used to reproduce the results in [A coarse-grained model for disordered and multi-domain proteins
-](https://www.biorxiv.org/content/10.1101/2024.02.03.578735v2).
+](https://doi.org/10.1101/2024.02.03.578735).
 
-We note that the current version of CALVADOS 3 (src/residues_pub.csv), as described in https://www.biorxiv.org/content/10.1101/2024.02.03.578735v2, differs from the version described in our original preprint (https://www.biorxiv.org/content/10.1101/2024.02.03.578735v1). We recommend users to use the current CALVADOS 3 parameters, and to refer to the original version (src/residues_pub_beta.csv) as CALVADOS 3beta.   
+We note that the current version of CALVADOS 3 (src/residues_pub.csv), as described in https://www.biorxiv.org/content/10.1101/2024.02.03.578735v3, differs from the version described in our original preprint (https://www.biorxiv.org/content/10.1101/2024.02.03.578735v2). We recommend users to use the current CALVADOS 3 parameters, and to refer to the original version (src/residues_pub_beta.csv) as CALVADOS 3beta.    
 
 ## Layout
 
