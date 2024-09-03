@@ -5,7 +5,7 @@ This repository contains codes, raw data and parameter files that used to reprod
 
 We note that the current version of CALVADOS 3 (src/residues_pub.csv), as described in https://www.biorxiv.org/content/10.1101/2024.02.03.578735v3, differs from the version described in our original preprint (https://www.biorxiv.org/content/10.1101/2024.02.03.578735v2). We recommend users to use the current CALVADOS 3 parameters, and to refer to the original version (src/residues_pub_beta.csv) as CALVADOS 3beta.    
 
-A demo of [CALVADOS 3 Colab](https://colab.research.google.com/drive/17IQtDI8wvPv3gNfAvX5ilXZ8EKyQf0EP#scrollTo=GYi-En_Gc--b) is available now. Looking forward to receiving your valuable feedbacks.     
+A demo of [CALVADOS 3 Colab](https://colab.research.google.com/github/KULL-Centre/_2024_Cao_CALVADOSCOM/blob/main/CALVADOS3_DEMO.ipynb) is available now. Looking forward to receiving your valuable feedbacks.     
 
 ## Layout
 
