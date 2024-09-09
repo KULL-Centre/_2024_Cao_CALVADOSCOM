@@ -16,7 +16,7 @@ dependencies:
   - numpy=1.23.5
   - pillow
   - pip:
-      - deerpredict==0.1.9
+      - deerpredict
       - networkx==3.1
       - protobuf==3.20.3
       - ray==2.0.0
