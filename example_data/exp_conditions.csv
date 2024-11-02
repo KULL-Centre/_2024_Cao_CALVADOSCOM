@@ -12,16 +12,16 @@ GHR-ICD,"20 mM Na2HPO4/NaH2PO4 (pH 7.3), 300 mM NaCl, 10x excess of DTT, 2% glyc
 Tau,"137 mM NaCl, 3 mM KCl, 10 mM Na2HPO4/NaH2PO4 (pH 7.4), 2 mM KH2PO4, and 1 mM DTT",288,170
 NLS,"HEPES 25 mM pH=7.4, NaCl 150 mM, DTT 10 mM",296,150
 IBB,PBS pH=7.4 and 10 mM DTT,296,150
-GS48,TBD,293.15,150
-GS32,TBD,293.15,150
-GS24,TBD,293.15,150
-GS16,TBD,293.15,150
-GS8,TBD,293.15,150
-GS0,TBD,293.15,150
-hSUMO_hnRNPA1S,TBD,293.15,100
-TIA1,TBD,293.15,100
-Ubq4,TBD,293,330
-Ubq3,TBD,293,330
-Ubq2,TBD,293,330
-THB_C2,TBD,295.15,150
-hnRNPA1S,TBD,293.15,150
+GS48,"20 °C in 20 mM sodium phosphate, pH 7.4, with 100 mM NaCl",293.15,150
+GS32,"20 °C in 20 mM sodium phosphate, pH 7.4, with 100 mM NaCl",293.15,150
+GS24,"20 °C in 20 mM sodium phosphate, pH 7.4, with 100 mM NaCl",293.15,150
+GS16,"20 °C in 20 mM sodium phosphate, pH 7.4, with 100 mM NaCl",293.15,150
+GS8,"20 °C in 20 mM sodium phosphate, pH 7.4, with 100 mM NaCl",293.15,150
+GS0,"20 °C in 20 mM sodium phosphate, pH 7.4, with 100 mM NaCl",293.15,150
+hSUMO_hnRNPA1S,"50mM Tris pH 7.5,10mM DTT, 2mM TCEP and the desired NaCl concentration",293.15,100
+TIA1,"10 mM potassium phosphate pH 6.0, 50 mM NaCl and 10 mM DTT",293.15,100
+Ubq4,293 K using a buffer containing 300 mM NaCl and 50 mM tris-HCl at pH 8.0,293,330
+Ubq3,293 K using a buffer containing 300 mM NaCl and 50 mM tris-HCl at pH 8.0,293,330
+Ubq2,293 K using a buffer containing 300 mM NaCl and 50 mM tris-HCl at pH 8.0,293,330
+THB_C2,"150 mM NaCl, 10 mM MES, 2 mM TCEP, 1 mM NaN3 at 4°C",295.15,150
+hnRNPA1S,"50mM Tris pH 7.5,10mM DTT, 2mM TCEP and the desired NaCl concentration",293.15,150
