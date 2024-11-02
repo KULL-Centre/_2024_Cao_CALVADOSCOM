@@ -1,27 +1,27 @@
-Protein,SAXS buffer,SAXS T [K],Ionic strength [mM]
-Hst5,"20 mM Tris (pH 7.5), 150 mM NaCl",293,166
-RS,"50 mM Na2HPO4/NaH2PO4 (pH 7.0), 100 mM NaCl",298,208
-Dss1,"20 mM Tris (pH 7.4), 150 mM NaCl, 2% glycerol, 5 mM DTT",288,166
-Sic1,"50 mM Tris (pH 7.5), 150 mM NaCl, 5 mM DTT, and 2 mM TCEP",298,190
-ProTa,"10 mM Tris (pH 7.4), 0.1 mM EDTA, 155 mM KCl, 2% glycerol",288,162
-NHE6cmdd,"20 mM Tris-HCl (pH 7.4), 150 mM NaCl, 2% glycerol, 5 mM DTT",288,166
-A1,"20 mM HEPES (pH 7.0), 150 mM NaCl",298,153
-aSyn,"20 mM Na2HPO4/NaH2PO4 (pH 7.4), 150 mM NaCl, 2% glycerol",293,200
-ANAC046,"20 mM Na2HPO4/NaH2PO4 (pH 7.0), 100 mM NaCl, 5 mM DTT",298,140
-GHR-ICD,"20 mM Na2HPO4/NaH2PO4 (pH 7.3), 300 mM NaCl, 10x excess of DTT, 2% glycerol",298,350
-Tau,"137 mM NaCl, 3 mM KCl, 10 mM Na2HPO4/NaH2PO4 (pH 7.4), 2 mM KH2PO4, and 1 mM DTT",288,170
-NLS,"HEPES 25 mM pH=7.4, NaCl 150 mM, DTT 10 mM",296,150
-IBB,PBS pH=7.4 and 10 mM DTT,296,150
-GS48,"20 °C in 20 mM sodium phosphate, pH 7.4, with 100 mM NaCl",293.15,150
-GS32,"20 °C in 20 mM sodium phosphate, pH 7.4, with 100 mM NaCl",293.15,150
-GS24,"20 °C in 20 mM sodium phosphate, pH 7.4, with 100 mM NaCl",293.15,150
-GS16,"20 °C in 20 mM sodium phosphate, pH 7.4, with 100 mM NaCl",293.15,150
-GS8,"20 °C in 20 mM sodium phosphate, pH 7.4, with 100 mM NaCl",293.15,150
-GS0,"20 °C in 20 mM sodium phosphate, pH 7.4, with 100 mM NaCl",293.15,150
-hSUMO_hnRNPA1S,"50mM Tris pH 7.5,10mM DTT, 2mM TCEP and the desired NaCl concentration",293.15,100
-TIA1,"10 mM potassium phosphate pH 6.0, 50 mM NaCl and 10 mM DTT",293.15,100
-Ubq4,293 K using a buffer containing 300 mM NaCl and 50 mM tris-HCl at pH 8.0,293,330
-Ubq3,293 K using a buffer containing 300 mM NaCl and 50 mM tris-HCl at pH 8.0,293,330
-Ubq2,293 K using a buffer containing 300 mM NaCl and 50 mM tris-HCl at pH 8.0,293,330
-THB_C2,"150 mM NaCl, 10 mM MES, 2 mM TCEP, 1 mM NaN3 at 4°C",295.15,150
-hnRNPA1S,"50mM Tris pH 7.5,10mM DTT, 2mM TCEP and the desired NaCl concentration",293.15,150
+Protein,SAXS buffer,SAXS T [K],Ionic strength [M]
+Hst5,"20 mM Tris (pH 7.5), 150 mM NaCl",293,0.166
+RS,"50 mM Na2HPO4/NaH2PO4 (pH 7.0), 100 mM NaCl",298,0.208
+Dss1,"20 mM Tris (pH 7.4), 150 mM NaCl, 2% glycerol, 5 mM DTT",288,0.166
+Sic1,"50 mM Tris (pH 7.5), 150 mM NaCl, 5 mM DTT, and 2 mM TCEP",298,0.19
+ProTa,"10 mM Tris (pH 7.4), 0.1 mM EDTA, 155 mM KCl, 2% glycerol",288,0.162
+NHE6cmdd,"20 mM Tris-HCl (pH 7.4), 150 mM NaCl, 2% glycerol, 5 mM DTT",288,0.166
+A1,"20 mM HEPES (pH 7.0), 150 mM NaCl",298,0.153
+aSyn,"20 mM Na2HPO4/NaH2PO4 (pH 7.4), 150 mM NaCl, 2% glycerol",293,0.2
+ANAC046,"20 mM Na2HPO4/NaH2PO4 (pH 7.0), 100 mM NaCl, 5 mM DTT",298,0.14
+GHR-ICD,"20 mM Na2HPO4/NaH2PO4 (pH 7.3), 300 mM NaCl, 10x excess of DTT, 2% glycerol",298,0.35
+Tau,"137 mM NaCl, 3 mM KCl, 10 mM Na2HPO4/NaH2PO4 (pH 7.4), 2 mM KH2PO4, and 1 mM DTT",288,0.17
+NLS,"HEPES 25 mM pH=7.4, NaCl 150 mM, DTT 10 mM",296,0.15
+IBB,PBS pH=7.4 and 10 mM DTT,296,0.15
+GS48,"20 °C in 20 mM sodium phosphate, pH 7.4, with 100 mM NaCl",293.15,0.15
+GS32,"20 °C in 20 mM sodium phosphate, pH 7.4, with 100 mM NaCl",293.15,0.15
+GS24,"20 °C in 20 mM sodium phosphate, pH 7.4, with 100 mM NaCl",293.15,0.15
+GS16,"20 °C in 20 mM sodium phosphate, pH 7.4, with 100 mM NaCl",293.15,0.15
+GS8,"20 °C in 20 mM sodium phosphate, pH 7.4, with 100 mM NaCl",293.15,0.15
+GS0,"20 °C in 20 mM sodium phosphate, pH 7.4, with 100 mM NaCl",293.15,0.15
+hSUMO_hnRNPA1S,"50mM Tris pH 7.5,10mM DTT, 2mM TCEP and the desired NaCl concentration",293.15,0.1
+TIA1,"10 mM potassium phosphate pH 6.0, 50 mM NaCl and 10 mM DTT",293.15,0.1
+Ubq4,293 K using a buffer containing 300 mM NaCl and 50 mM tris-HCl at pH 8.0,293,0.33
+Ubq3,293 K using a buffer containing 300 mM NaCl and 50 mM tris-HCl at pH 8.0,293,0.33
+Ubq2,293 K using a buffer containing 300 mM NaCl and 50 mM tris-HCl at pH 8.0,293,0.33
+THB_C2,"150 mM NaCl, 10 mM MES, 2 mM TCEP, 1 mM NaN3 at 4°C",295.15,0.15
+hnRNPA1S,"50mM Tris pH 7.5,10mM DTT, 2mM TCEP and the desired NaCl concentration",293.15,0.15
