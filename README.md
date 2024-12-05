@@ -6,7 +6,7 @@ We note that the current version of CALVADOS 3 (src/residues_pub.csv), as descri
 
 A demo of [CALVADOS 3 Colab](https://colab.research.google.com/github/KULL-Centre/ColabCALVADOS/blob/main/simulate_and_reweight/CALVADOS_simulate_and_reweight.ipynb) is available now. Looking forward to receiving your valuable feedbacks.     
 
-We created another repository on Zenodo to upload coarse-grained trajectories of IDPs and MDPs simulated by CALVADOS 3. You can find the repo [here](https://zenodo.org/records/14282804). And the trajectories are in `data/IDPs_MDPsCOM_2.2_0.08_2_validate` Currently, the Zenodo DOI can not be found in the DOI System.  
+We created another repository on Zenodo to upload coarse-grained trajectories of IDPs and MDPs simulated by CALVADOS 3. You can find the repo [here](https://zenodo.org/records/14282804). And the trajectories are in `data/IDPs_MDPsCOM_2.2_0.08_2_validate` Currently, the Zenodo DOI can not be found in the DOI System for unknown reasons.  
 ## Layout
 
 `data/`: raw data used for making figures in the paper; 
